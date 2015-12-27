@@ -42,8 +42,11 @@ function allSubSetsOfSize(fromArr,subsetSize,startAt) {
   for (let i = at ; i < fromArr.length; i++) {
     for (let j = i+1; j < fromArr.length; j++){
       let reduced = allSubSetsOfSize(fromArr,subsize- 1,j)
-      let e = [fromArr[i]].concat(reduced)
-      result.push(e)
+      for (let k = 0; k < reduced.length; k++) {
+        let e = [fromArr[i]].concat(reduced[k])
+        result.push(e)
+      }
+      console.log("key")
     }
   }
   return result
