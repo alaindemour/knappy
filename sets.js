@@ -4,6 +4,9 @@
 
 "use strict"
 
+const _ = require('lodash')
+
+
 let sampleItem = {benefit: 4, cost : 2}
 
 // generates all subset of element of a given size, from a given array, but only starting at some position
@@ -12,7 +15,7 @@ function allSubSetsOfSize(fromArr,subsetSize,startAt) {
   let subsize = (typeof subsetSize  !== 'undefined') ? subsetSize : 1
   let at = (typeof startAt  !== 'undefined') ? startAt : 0
 
-  console.log(`fromArr ${fromArr} subsetSize ${subsetSize}  startAt ${startAt}`)
+  console.log(`fromArr ${fromArr} subsetSize ${subsize}  startAt ${at}`)
 
   if (subsize > fromArr.length - at){
     return []
@@ -24,7 +27,11 @@ function allSubSetsOfSize(fromArr,subsetSize,startAt) {
 
   if (subsize === 1) {
     // TBD replace with some immutable collection module
-    return fromArr.slice(at,at+1)
+    let result = []
+    for (let i = at; i < fromArr.length;i++){
+      result.push([fromArr[i]])
+    }
+    return result
   }
 
   if (subsetSize === fromArr.length - startAt) {
