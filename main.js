@@ -8,7 +8,7 @@
 const sets = require('./sets')
 const allSubSetsOfSize = sets.allSubSetsOfSize
 
-let x = ['a','b','c','d','e']
+let x = ['a','b','c','d','e','f']
 
 let result = allSubSetsOfSize(x,2)
 
