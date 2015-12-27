@@ -1,0 +1,36 @@
+{
+  "name": "knappy",
+  "version": "0.1",
+  "description": "musings in knapsacks",
+  "keywords": [
+    "knapsack"
+  ],
+  "maintainers": [
+    {
+      "name": "Alain Demour",
+      "email": "alain@cakeforthepeople.com",
+      "url": "http://cakeforthepeople.org/"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/alaindemour/knappy/issues"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alaindemour/knappy"
+  },
+  "main": "./main",
+  "dependencies": {
+    "immutable": "^3.7.6"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "engines": [
+    "node >=5.3.0"
+  ],
+  "directories": {},
+  "files": [],
+  "readmeFilename": "README.md"
+}
