@@ -10,13 +10,21 @@ const allSubSetsOfSize = sets.allSubSetsOfSize
 
 
 describe('subsets of a given sizes', () => {
+
+    let x = ['a','b','c','d','e']
+
     describe('When calling with an array of objects [a,b,c,d,e] and default size and start position', () => {
         it('should return the exact same array', () => {
-            let x = ['a','b','c','d','e']
-            let result = allSubSetsOfSize(x)
-            assert.deepEqual(x,result)
+            assert.deepEqual(x,allSubSetsOfSize(x))
         })
     })
+
+    describe('When calling with an array of objects [a,b,c,d,e] for subsets of size zero i.e. empty set', () => {
+        it('should return a single empty array', () => {
+            assert.deepEqual([],allSubSetsOfSize(x,0))
+        })
+    })
+
 })
 
 

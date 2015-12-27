@@ -12,9 +12,14 @@ function allSubSetsOfSize(fromArr,subsetSize,startAt) {
   subsetSize = (typeof subsetSize  !== 'undefined') ? subsetSize : 1
   startAt = (typeof startAt  !== 'undefined') ? startAt : 0
 
-  console.log(`subsetSize ${subsetSize} fromArr.length ${fromArr.length}`)
+//  console.log(`subsetSize ${subsetSize} fromArr.length ${fromArr.length}`)
+
   if (subsetSize > fromArr.length){
     throw new Error('subset size larger than size of universe')
+  }
+
+  if (subsetSize === 0) {
+    return []
   }
 
   if (subsetSize === 1) {
