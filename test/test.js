@@ -7,7 +7,7 @@
 
 const _ = require('lodash')
 const assert = require('assert')
-const sets = require('../sets')
+const sets = require('../powerSet')
 const allSubSetsOfSize = sets.allSubSetsOfSize
 const powerSet = sets.powerSet
 const Knapsack = require('../Knapsack')

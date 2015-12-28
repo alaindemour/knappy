@@ -3,7 +3,7 @@
  */
 
 "use strict"
-const powerSet = require('./sets').powerSet
+const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
 
 class Knapsack {

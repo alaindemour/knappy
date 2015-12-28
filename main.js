@@ -5,7 +5,7 @@
 
 "use strict"
 
-const sets = require('./sets')
+const sets = require('./powerSet')
 const allSubSetsOfSize = sets.allSubSetsOfSize
 const all = sets.allSubsets
 const Knapsack = require('./Knapsack')
