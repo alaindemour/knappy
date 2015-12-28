@@ -7,12 +7,12 @@ const allSubsets = require('./sets').allSubsets
 const Item = require('./Item')
 
 class Knapsack {
-  constructor(capacity) {
-    this.capacity = capacity
+  constructor(params) {
+    this.capacity = params.capacity
   }
 
   bruteForce(listOfItems) {
-    let max = new Item(0, 0)
+    let max = new Item({benefit:0, cost: 0})
     let all = allSubsets(listOfItems)
     for (let sub of all) {
       let candidate = Item.value(sub)

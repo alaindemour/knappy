@@ -4,9 +4,9 @@
 "use strict"
 
 class Item {
-  constructor(benefit, cost) {
-    this.benefit = benefit
-    this.cost = cost
+  constructor(params) {
+    this.benefit = params.benefit
+    this.cost = params.cost
   }
 
   static value(listOfItems) {
@@ -17,7 +17,7 @@ class Item {
       sumOfCosts = sumOfCosts + item.cost
     }
 
-    return new Item(sumOfBenefits,sumOfCosts)
+    return new Item({benefit: sumOfBenefits, cost: sumOfCosts})
   }
 }
 

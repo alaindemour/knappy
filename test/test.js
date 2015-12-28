@@ -72,10 +72,10 @@ describe('set of all the subsets', () => {
 
 describe('knapsack', () => {
 
-  let target = new Knapsack(50)
-  let item1 = new Item(60,10)
-  let item2 = new Item(100,20)
-  let item3 = new Item(120,30)
+  let target = new Knapsack({capacity : 50})
+  let item1 = new Item({benefit: 60, cost:10})
+  let item2 = new Item({benefit: 100, cost: 20})
+  let item3 = new Item({benefit: 120, cost: 30})
 
   let offer = [item1, item2, item3]
 
