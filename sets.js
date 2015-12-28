@@ -24,7 +24,7 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
     return []
   }
   if (subsize === 0) {
-    return []
+    return [[]]
   }
   if (subsize === 1) {
     // TBD replace with some immutable collection module
@@ -42,7 +42,7 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
   let result = []
   for (let i = at; i < len; i++) {
     let current = fromArr[i]
-    let reduced = allSubSetsOfSize(fromArr, subsize - 1, i+1)
+    let reduced = allSubSetsOfSize(fromArr, subsize - 1, i + 1)
     let reducedLen = reduced.length
     for (let k = 0; k < reducedLen; k++) {
       let e = [current].concat(reduced[k])
@@ -52,7 +52,18 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
   return result
 }
 
+function allSubsets(arr) {
+  let len = arr.length
+  let result = []
+  for (let i = 0; i <= len; i++) {
+    result = result.concat(allSubSetsOfSize(arr,i))
+  }
+  return result
+}
+
+
 
 module.exports = {
   allSubSetsOfSize: allSubSetsOfSize
+  , allSubsets: allSubsets
 }

@@ -9,6 +9,7 @@ const _ = require('lodash')
 const assert = require('assert')
 const sets = require('../sets')
 const allSubSetsOfSize = sets.allSubSetsOfSize
+const allSubSets = sets.allSubsets
 
 
 describe('subsets of a given sizes', () => {
@@ -24,8 +25,8 @@ describe('subsets of a given sizes', () => {
     })
 
     describe('When calling with an array of objects [a,b,c,d,e] for subsets of size zero i.e. empty set', () => {
-        it('should return a single empty array', () => {
-            assert.deepEqual([],allSubSetsOfSize(x,0))
+        it('should return the empty set ', () => {
+            assert.deepEqual([[]],allSubSetsOfSize(x,0))
         })
     })
 
@@ -50,6 +51,19 @@ describe('subsets of a given sizes', () => {
     describe('When calling with an array of objects [a,b,c,d,e] for subsets of size 5' , () => {
         it('should return 1 subsets', () => {
             assert.equal(1,allSubSetsOfSize(x,5).length)
+        })
+    })
+
+})
+
+
+describe('set of all the subsets', () => {
+
+    let x = ['a','b','c','d','e']
+
+    describe('When computing the set of all the subsets of [a,b,c,d,e]', () => {
+        it('should return 2^5 === 32 subsets', () => {
+            assert.equal(32,allSubSets(x).length)
         })
     })
 
