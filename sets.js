@@ -6,9 +6,6 @@
 
 const _ = require('lodash')
 
-
-let sampleItem = {benefit: 4, cost: 2}
-
 // generates all subset of element of a given size, from a given array, but only starting at some position
 function allSubSetsOfSize(fromArr, subsetSize, startAt) {
 
@@ -52,7 +49,7 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
   return result
 }
 
-function allSubsets(arr) {
+function powerSet(arr) {
   let len = arr.length
   let result = []
   for (let i = 0; i <= len; i++) {
@@ -65,5 +62,5 @@ function allSubsets(arr) {
 
 module.exports = {
   allSubSetsOfSize: allSubSetsOfSize
-  , allSubsets: allSubsets
+  , allSubsets: powerSet
 }
