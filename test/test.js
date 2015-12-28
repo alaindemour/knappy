@@ -9,7 +9,7 @@ const _ = require('lodash')
 const assert = require('assert')
 const sets = require('../sets')
 const allSubSetsOfSize = sets.allSubSetsOfSize
-const allSubSets = sets.allSubsets
+const powerSet = sets.powerSet
 const Knapsack = require('../Knapsack')
 const Item = require('../Item')
 
@@ -64,7 +64,7 @@ describe('set of all the subsets', () => {
 
   describe('When computing the set of all the subsets of [a,b,c,d,e]', () => {
     it('should return 2^5 === 32 subsets', () => {
-      assert.equal(32, allSubSets(x).length)
+      assert.equal(32, powerSet(x).length)
     })
   })
 

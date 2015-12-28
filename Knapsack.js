@@ -3,7 +3,7 @@
  */
 
 "use strict"
-const allSubsets = require('./sets').allSubsets
+const powerSet = require('./sets').powerSet
 const Item = require('./Item')
 
 class Knapsack {
@@ -13,7 +13,7 @@ class Knapsack {
 
   bruteForce(listOfItems) {
     let max = new Item({benefit:0, cost: 0})
-    let all = allSubsets(listOfItems)
+    let all = powerSet(listOfItems)
     for (let sub of all) {
       let candidate = Item.value(sub)
       if (candidate.cost <= this.capacity) {

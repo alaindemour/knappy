@@ -62,5 +62,5 @@ function powerSet(arr) {
 
 module.exports = {
   allSubSetsOfSize: allSubSetsOfSize
-  , allSubsets: powerSet
+  , powerSet : powerSet
 }
