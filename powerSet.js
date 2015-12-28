@@ -4,17 +4,34 @@
 
 "use strict"
 
+
+
+
 const _ = require('lodash')
+
+
+// Fast powerset computation
+function powerSet(input) {
+  let accu = [[]]
+  const len = input.length
+  for (let i = 0; i < len; i++) {
+    let ele = input[i]
+    const acculen = accu.length
+    for (let j = 0; j < acculen; j++){
+      let newarray = accu[j].concat([ele])
+      accu.push(newarray)
+    }
+  }
+  return accu
+}
+
+
 
 // generates all subset of element of a given size, from a given array, but only starting at some position
 function allSubSetsOfSize(fromArr, subsetSize, startAt) {
-
   let subsize = (typeof subsetSize !== 'undefined') ? subsetSize : 1
   let at = (typeof startAt !== 'undefined') ? startAt : 0
   let len = fromArr.length
-
-
-//  console.log(`fromArr ${fromArr} subsetSize ${subsize}  startAt ${at}`)
 
   // Base Cases
   if (subsize > len - at) {
@@ -45,15 +62,6 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
       let e = [current].concat(reduced[k])
       result.push(e)
     }
-  }
-  return result
-}
-
-function powerSet(arr) {
-  let len = arr.length
-  let result = []
-  for (let i = 0; i <= len; i++) {
-    result = result.concat(allSubSetsOfSize(arr,i))
   }
   return result
 }
