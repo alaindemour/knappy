@@ -10,7 +10,7 @@ const allSubSetsOfSize = sets.allSubSetsOfSize
 
 let x = ['a','b','c','d','e']
 
-let result = allSubSetsOfSize(x,2)
+let result = allSubSetsOfSize(x,4)
 
 console.log(result)
 console.log(result.length)

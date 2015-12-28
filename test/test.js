@@ -35,6 +35,24 @@ describe('subsets of a given sizes', () => {
         })
     })
 
+    describe('When calling with an array of objects [a,b,c,d,e] for subsets of size 3' , () => {
+        it('should return 10 subsets', () => {
+            assert.equal(10,allSubSetsOfSize(x,3).length)
+        })
+    })
+
+    describe('When calling with an array of objects [a,b,c,d,e] for subsets of size 4' , () => {
+        it('should return 5 subsets', () => {
+            assert.equal(5,allSubSetsOfSize(x,4).length)
+        })
+    })
+
+    describe('When calling with an array of objects [a,b,c,d,e] for subsets of size 5' , () => {
+        it('should return 1 subsets', () => {
+            assert.equal(1,allSubSetsOfSize(x,5).length)
+        })
+    })
+
 })
 
 

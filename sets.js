@@ -17,7 +17,7 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
   let len = fromArr.length
 
 
-  console.log(`fromArr ${fromArr} subsetSize ${subsize}  startAt ${at}`)
+//  console.log(`fromArr ${fromArr} subsetSize ${subsize}  startAt ${at}`)
 
   // Base Cases
   if (subsize > len - at) {
@@ -35,7 +35,7 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
     return result
   }
   if (subsetSize === len - at) {
-    return fromArr.slice(at)
+    return [fromArr.slice(at)]
   }
 
   // General Case
@@ -48,7 +48,6 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
       let e = [current].concat(reduced[k])
       result.push(e)
     }
-    console.log("key")
   }
   return result
 }
