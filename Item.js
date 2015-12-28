@@ -8,17 +8,17 @@ class Item {
     this.benefit = benefit
     this.cost = cost
   }
-}
 
-Item.value = function value (listOfItems) {
-  let sumOfBenefits = 0
-  let sumOfCosts = 0
-  for (let item of listOfItems){
-    sumOfBenefits = sumOfBenefits + item.benefit
-    sumOfCosts = sumOfCosts + item.cost
+  static value(listOfItems) {
+    let sumOfBenefits = 0
+    let sumOfCosts = 0
+    for (let item of listOfItems){
+      sumOfBenefits = sumOfBenefits + item.benefit
+      sumOfCosts = sumOfCosts + item.cost
+    }
+
+    return new Item(sumOfBenefits,sumOfCosts)
   }
-
-  return new Item(sumOfBenefits,sumOfCosts)
 }
 
 
