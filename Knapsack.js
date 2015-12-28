@@ -25,7 +25,6 @@ class Knapsack {
     }
     return max
   }
-
 }
 
 
