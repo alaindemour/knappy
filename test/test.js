@@ -70,19 +70,19 @@ describe('set of all the subsets', () => {
 
 })
 
-describe('knapsack brute force', () => {
+describe('knapsack', () => {
 
-  let target = new Knapsack(100)
-  let item1 = new Item(80, 80)
-  let item2 = new Item(50, 50)
-  let item3 = new Item(10, 10)
+  let target = new Knapsack(50)
+  let item1 = new Item(60,10)
+  let item2 = new Item(100,20)
+  let item3 = new Item(120,30)
 
   let offer = [item1, item2, item3]
 
   describe('When computing the brute force of the target knapsack', () => {
-    it('the benefit shoudl be 90 and the list contains item1 and item3', () => {
+    it('the benefit shoudl be 200 and the list contains item3 and item3', () => {
       let result = target.bruteForce(offer)
-      assert.equal(90, result.benefit)
+      assert.equal(220, result.benefit)
     })
   })
 
