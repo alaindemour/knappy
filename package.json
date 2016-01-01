@@ -10,6 +10,9 @@
     "url": "https://github.com/alaindemour/knappy"
   },
   "dependencies": {},
+  "scripts" : {
+    "test" : "mocha test"
+  },
   "readmeFilename": "README.md",
   "devDependencies": {
     "assert": "^1.3.0",
