@@ -33,13 +33,19 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
   let at = (typeof startAt !== 'undefined') ? startAt : 0
   let len = fromArr.length
 
-  // Base Cases
+  // Base and Pathological Cases
+
+  // Impossibility, subset is larger than enclosing set
   if (subsize > len - at) {
     return []
   }
+
+  // Empty Set
   if (subsize === 0) {
     return [[]]
   }
+
+  // Singletons
   if (subsize === 1) {
     // TBD replace with some immutable collection module
     let result = []
@@ -48,6 +54,8 @@ function allSubSetsOfSize(fromArr, subsetSize, startAt) {
     }
     return result
   }
+
+  // identity, subset is the same as enclosing set
   if (subsetSize === len - at) {
     return [fromArr.slice(at)]
   }
