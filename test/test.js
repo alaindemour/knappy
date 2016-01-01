@@ -80,9 +80,18 @@ describe('knapsack', () => {
   let offer = [item1, item2, item3]
 
   describe('When computing the brute force of the target knapsack', () => {
-    it('the benefit shoudl be 200 and the list contains item3 and item3', () => {
+    it('the benefit shoudl be 200 and the list contains item2 and item3', () => {
       let result = target.bruteForce(offer)
       assert.equal(220, result.benefit)
+    })
+  })
+
+  let singleton = [item1]
+
+  describe('When computing knapsack recursive with the singleton item1', () => {
+    it('the benefit shoudl be 60 and the list contains onl item1', () => {
+      let result = target.zeroOneKnapsackRecursive(singleton)
+      assert.equal(60, result)
     })
   })
 

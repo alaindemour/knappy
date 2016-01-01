@@ -12,10 +12,14 @@ class Knapsack {
   }
 
 
-  ZeroOneKnapsack(listOfItems, capacity, numberOfPicks, solutionPath) {
+  zeroOneKnapsackRecursive(listOfItems) {
 
+    let capacity = this.capacity
+    let numberOfPicks = listOfItems.length
+    let solutionPath = []
     let memo = new Map()
 
+    let self = this
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
     // before this method is called.
@@ -32,7 +36,7 @@ class Knapsack {
       if (numberOfPicks === 1) {
         // going down from most beneficial to least
         for (let item of listOfItems) {
-          if (item.cost <= this.capacity) {
+          if (item.cost <= self.capacity) {
             solutionPath.push(item)
             console.log(`ELEMENTARY SOLUTION ${item.cost}`)
             memo.set(`${capacity}${numberOfPicks}`, {item: item, solutionPath: solutionPath})
@@ -43,12 +47,12 @@ class Knapsack {
 
       // general case
       let subPathA = []
-      let benefitA = this.bestMax(listOfItems, capacity, numberOfPicks - 1, subPathA)
+      let benefitA = bestMax(listOfItems, capacity, numberOfPicks - 1, subPathA)
       let pathB = []
       let maxBs = 0
       for (let item of listOfItems) {
         let subPathB = []
-        let benefitB = this.bestMax(listOfItems, capacity - item.benefit, numberOfPicks - 1, subPathB)
+        let benefitB = self.bestMax(listOfItems, capacity - item.benefit, numberOfPicks - 1, subPathB)
         if (benefitB > maxBs) {
           maxBs = benefitB
           pathB = subPathB
@@ -66,7 +70,7 @@ class Knapsack {
       }
     }
 
-    return bestMax(listofItems, capacity, numberOfPicks, solutionPath)
+    return bestMax(listOfItems, capacity, numberOfPicks, solutionPath)
 
   }
 
