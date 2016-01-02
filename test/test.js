@@ -95,6 +95,15 @@ describe('knapsack', () => {
     })
   })
 
+  let pair = [item1,item2]
+
+  describe('When computing knapsack recursive with the pair [item1,item2]', () => {
+    it('the benefit shoudl be 160 and the list contains onl item1 item2', () => {
+      let result = target.zeroOneKnapsackRecursive(pair)
+      assert.equal(160, result)
+    })
+  })
+
 })
 
 

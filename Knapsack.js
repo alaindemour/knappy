@@ -11,22 +11,21 @@ class Knapsack {
     this.capacity = params.capacity
   }
 
-
+  // The list of items can be unsorted, we will sort
   zeroOneKnapsackRecursive(listOfItems) {
 
     let capacity = this.capacity
     let numberOfPicks = listOfItems.length
     let solutionPath = []
     let memo = new Map()
-
     let self = this
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
     // before this method is called.
-    function bestMax(listOfItems, capacity, numberOfPicks, solutionPath) {
+    function bestMax(listOfItems, capacity, pos, numberOfPicks, solutionPath) {
 
       // memoized case, we have already computed this subproblem
-      let solution = memo.get(`${capacity}${numberOfPicks}`)
+      let solution = memo.get(`${capacity}.${pos}.${numberOfPicks}`)
       if (solution) {
         solutionPath.concat(solution.solutionPath)
         return solution.item.benefit
@@ -35,42 +34,42 @@ class Knapsack {
       // normal base case (not memoized)
       if (numberOfPicks === 1) {
         // going down from most beneficial to least
-        for (let item of listOfItems) {
+        for (let i = pos; i < listOfItems.length; i++) {
+          let item = listOfItems[i]
           if (item.cost <= self.capacity) {
             solutionPath.push(item)
             console.log(`ELEMENTARY SOLUTION ${item.cost}`)
-            memo.set(`${capacity}${numberOfPicks}`, {item: item, solutionPath: solutionPath})
+            memo.set(`${capacity}.${pos}.${numberOfPicks}`, {item: item, solutionPath: solutionPath})
             return item.benefit
           }
         }
       }
 
       // general case
+      let item = listOfItems[pos]
       let subPathA = []
-      let benefitA = bestMax(listOfItems, capacity, numberOfPicks - 1, subPathA)
+      let benefitA = bestMax(listOfItems, capacity, pos + 1, numberOfPicks - 1, subPathA)
+      let itemB = []
       let pathB = []
-      let maxBs = 0
-      for (let item of listOfItems) {
-        let subPathB = []
-        let benefitB = self.bestMax(listOfItems, capacity - item.benefit, numberOfPicks - 1, subPathB)
-        if (benefitB > maxBs) {
-          maxBs = benefitB
-          pathB = subPathB
-        }
-        if (benefitA > maxBs) {
-          solutionPath.concat(subPathA)
-          console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is ${subPathA[0].cost}`)
-          return benefitA
-        }
-        else {
-          console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is ${pathB[0].cost}`)
-          solutionPath.concat(pathB)
-          return maxBs
-        }
+      let subPathB = []
+      let benefitB = bestMax(listOfItems, capacity - item.cost, pos + 1, numberOfPicks - 1, subPathB)
+      let totalB = benefitB + item.benefit
+      if (benefitA > totalB) {
+        solutionPath.concat(subPathA)
+        console.log(
+          `solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathA ${subPathA[0].cost}`)
+        return benefitA
+      }
+      else {
+        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathB ${subPathB[0].cost}`)
+        solutionPath.push(itemB)
+        solutionPath.concat(subPathB)
+        return totalB
       }
     }
 
-    return bestMax(listOfItems, capacity, numberOfPicks, solutionPath)
+    let sorted = listOfItems.sort()
+    return bestMax(sorted, capacity, 0, numberOfPicks, solutionPath)
 
   }
 
