@@ -7,6 +7,7 @@ class Item {
   constructor(params) {
     this.benefit = params.benefit
     this.cost = params.cost
+    this.name = params.name
   }
 
   static value(listOfItems) {

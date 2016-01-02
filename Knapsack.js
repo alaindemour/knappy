@@ -18,12 +18,12 @@ class Knapsack {
 
     let capacity = this.capacity
     let numberOfPicks = listOfItems.length
-    
+
+    // position zero unused in this memo table, just to keep the mapping clear and obivious
     let memo = []
     for (let i = 0 ; i <= listOfItems.length ; i++) {
       memo[i] = []
     }
-    
     let memoHits = 0
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
@@ -33,9 +33,8 @@ class Knapsack {
       let item = listOfItems[numberOfPicks - 1]
 
       // Base Cases
-      // Pathological corner case
-      if (numberOfPicks === 0) {
-        return [{head: 0, tail: null}]
+      if (numberOfPicks === 0 || capacity <= 0) {
+        return [{compoundedBenefit: 0, item : null}]
       }
 
       // normal base case which ends recursion
@@ -76,7 +75,6 @@ class Knapsack {
 
     let sorted = listOfItems.sort()
     let finalSolution = bestMax(sorted, capacity, numberOfPicks)
-    console.log(`Memoized Solutions: ${memo.size}`)
     console.log(`Memoized Hits: ${memoHits}`)
     return finalSolution
 
