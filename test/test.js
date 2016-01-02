@@ -77,6 +77,7 @@ describe('knapsack', () => {
   let item2 = new Item({benefit: 100, cost: 20})
   let item3 = new Item({benefit: 120, cost: 30})
 
+
   let offer = [item1, item2, item3]
 
   describe('When computing the brute force of the target knapsack', () => {

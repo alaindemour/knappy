@@ -18,58 +18,69 @@ class Knapsack {
     let numberOfPicks = listOfItems.length
     let solutionPath = []
     let memo = new Map()
+    let memoHits = 0
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
     // before this method is called.
-    function bestMax(listOfItems, capacity, pos, numberOfPicks, solutionPath) {
+    function bestMax(listOfItems, capacity, numberOfPicks, solutionPath) {
 
-      // memoized case, we have already computed this subproblem
-      let solution = memo.get(`${capacity}.${pos}.${numberOfPicks}`)
-      if (solution) {
-        solutionPath.concat(solution.solutionPath)
-        return solution.item.benefit
+
+      // Base Cases
+
+      // Pathological corner case
+      if (numberOfPicks === 0) {
+        return 0
       }
 
       // normal base case (not memoized)
       if (numberOfPicks === 1) {
-        // going down from most beneficial to least
-        for (let i = pos; i < listOfItems.length; i++) {
-          let item = listOfItems[i]
-          if (item.cost <= capacity) {
-            solutionPath.push(item)
-            console.log(`ELEMENTARY SOLUTION benefit: ${item.benefit} cost: ${item.cost}`)
-            memo.set(`${capacity}.${pos}.${numberOfPicks}`, {item: item, solutionPath: solutionPath})
-            return item.benefit
-          }
+        let item = listOfItems[0]
+        if (item.cost <= capacity) {
+          solutionPath.push(item)
+          console.log(`ELEMENTARY SOLUTION benefit: ${item.benefit} cost: ${item.cost}`)
+          memo.set(`${capacity}.${numberOfPicks}`, {item: item, solutionPath: solutionPath})
+          return item.benefit
         }
         return 0
       }
 
+      // memoized case, we have already computed this subproblem
+      let solution = memo.get(`${capacity}.${numberOfPicks}`)
+      if (solution) {
+        memoHits++
+        solutionPath.concat(solution.solutionPath)
+        return solution.item.benefit
+      }
+
       // general case
-      let item = listOfItems[pos]
+      // item to be tested
+      let item = listOfItems[numberOfPicks -1]
+
       let subPathA = []
-      let benefitA = bestMax(listOfItems, capacity, pos + 1, numberOfPicks - 1, subPathA)
-      let itemB = []
-      let pathB = []
+      let benefitA = bestMax(listOfItems, capacity, numberOfPicks - 1, subPathA)
+
       let subPathB = []
-      let benefitB = bestMax(listOfItems, capacity - item.cost, pos + 1, numberOfPicks - 1, subPathB)
-      let totalB = benefitB + item.benefit
-      if (benefitA > totalB) {
+      let subBenefitsB = bestMax(listOfItems, capacity - item.cost, numberOfPicks - 1, subPathB)
+      let totalBenefitB = subBenefitsB + item.benefit
+
+      if (benefitA > totalBenefitB) {
         solutionPath.concat(subPathA)
-        console.log(
-          `solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathA ${subPathA[0].cost}`)
+//        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathA ${subPathA[0].cost}`)
         return benefitA
       }
       else {
-        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathB ${subPathB[0].cost}`)
-        solutionPath.push(itemB)
+        solutionPath.push(item)
         solutionPath.concat(subPathB)
-        return totalB
+//        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathB ${subPathB[0].cost}`)
+        return totalBenefitB
       }
     }
 
     let sorted = listOfItems.sort()
-    return bestMax(sorted, capacity, 0, numberOfPicks, solutionPath)
+    let finalSolution = bestMax(sorted, capacity,numberOfPicks, solutionPath)
+    console.log(`Memoized Solutions: ${memo.size}`)
+    console.log(`Memoized Hits: ${memoHits}`)
+    return finalSolution
 
   }
 
