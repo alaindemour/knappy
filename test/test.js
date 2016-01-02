@@ -104,6 +104,16 @@ describe('knapsack', () => {
     })
   })
 
+
+  let triplet = [item1,item2,item3]
+
+  describe('When computing knapsack recursive with the truplet [item1,item2,item3]', () => {
+    it('the benefit shoudl be 220 and the list contains onl item1 item3', () => {
+      let result = target.zeroOneKnapsackRecursive(triplet)
+      assert.equal(220, result)
+    })
+  })
+
 })
 
 

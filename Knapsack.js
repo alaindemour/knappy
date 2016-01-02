@@ -18,7 +18,6 @@ class Knapsack {
     let numberOfPicks = listOfItems.length
     let solutionPath = []
     let memo = new Map()
-    let self = this
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
     // before this method is called.
@@ -36,13 +35,14 @@ class Knapsack {
         // going down from most beneficial to least
         for (let i = pos; i < listOfItems.length; i++) {
           let item = listOfItems[i]
-          if (item.cost <= self.capacity) {
+          if (item.cost <= capacity) {
             solutionPath.push(item)
-            console.log(`ELEMENTARY SOLUTION ${item.cost}`)
+            console.log(`ELEMENTARY SOLUTION benefit: ${item.benefit} cost: ${item.cost}`)
             memo.set(`${capacity}.${pos}.${numberOfPicks}`, {item: item, solutionPath: solutionPath})
             return item.benefit
           }
         }
+        return 0
       }
 
       // general case

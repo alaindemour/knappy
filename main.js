@@ -26,9 +26,9 @@ let item1 = new Item({benefit: 60, cost:10})
 let item2 = new Item({benefit: 100, cost: 20})
 let item3 = new Item({benefit: 120, cost: 30})
 
-let pair = [item1, item2]
+let x = [item1, item2,item3]
 
 
-let result = target.zeroOneKnapsackRecursive(pair)
+let result = target.zeroOneKnapsackRecursive(x)
 
 console.log(result)
