@@ -5,6 +5,8 @@
 "use strict"
 const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
+const list = require('./list')
+
 
 class Knapsack {
   constructor(params) {
@@ -22,62 +24,58 @@ class Knapsack {
 
     // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
     // before this method is called.
-    function bestMax(listOfItems, capacity, numberOfPicks, solutionPath) {
+    function bestMax(listOfItems, capacity, numberOfPicks) {
 
+      let item = listOfItems[numberOfPicks -1]
 
       // Base Cases
-
       // Pathological corner case
       if (numberOfPicks === 0) {
-        return 0
+        return [{ head : 0, tail : null}]
       }
 
-      // normal base case (not memoized)
+      // normal base case which ends recursion
       if (numberOfPicks === 1) {
-        let item = listOfItems[0]
         if (item.cost <= capacity) {
-          solutionPath.push(item)
-          console.log(`ELEMENTARY SOLUTION benefit: ${item.benefit} cost: ${item.cost}`)
-          memo.set(`${capacity}.${numberOfPicks}`, {item: item, solutionPath: solutionPath})
-          return item.benefit
+          memo.set(`${capacity}.${numberOfPicks}`, [{compoundedBenefit: item.benefit, item: item}])
+          return [{ compoundedBenefit : item.benefit, item: item}]
         }
-        return 0
+        else {
+          memo.set(`${capacity}.${numberOfPicks}`, [{compoundedBenefit: 0, item: null}])
+          return [{compoundedBenefit: 0, item: null}]
+        }
       }
 
       // memoized case, we have already computed this subproblem
       let solution = memo.get(`${capacity}.${numberOfPicks}`)
       if (solution) {
         memoHits++
-        solutionPath.concat(solution.solutionPath)
-        return solution.item.benefit
+        return solution
       }
 
       // general case
       // item to be tested
-      let item = listOfItems[numberOfPicks -1]
 
-      let subPathA = []
-      let benefitA = bestMax(listOfItems, capacity, numberOfPicks - 1, subPathA)
+      let benefitA = bestMax(listOfItems, capacity, numberOfPicks - 1)
+      let subBenefitsB = bestMax(listOfItems, capacity - item.cost, numberOfPicks - 1)
+      let totalBenefitB = subBenefitsB[0].compoundedBenefit + item.benefit
+      let max = null
 
-      let subPathB = []
-      let subBenefitsB = bestMax(listOfItems, capacity - item.cost, numberOfPicks - 1, subPathB)
-      let totalBenefitB = subBenefitsB + item.benefit
-
-      if (benefitA > totalBenefitB) {
-        solutionPath.concat(subPathA)
+      if (benefitA[0].compoundedBenefit > totalBenefitB) {
 //        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathA ${subPathA[0].cost}`)
-        return benefitA
+        max = benefitA
       }
       else {
-        solutionPath.push(item)
-        solutionPath.concat(subPathB)
+          subBenefitsB.unshift({compoundedBenefit :totalBenefitB, item : item})
 //        console.log(`solution for capacity ${capacity}, numberofPicks ${numberOfPicks - 1} is PathB ${subPathB[0].cost}`)
-        return totalBenefitB
+        max = subBenefitsB
       }
+      memo.set(`${capacity}.${numberOfPicks}`, max)
+      return max
     }
 
     let sorted = listOfItems.sort()
-    let finalSolution = bestMax(sorted, capacity,numberOfPicks, solutionPath)
+    let finalSolution = bestMax(sorted, capacity,numberOfPicks)
     console.log(`Memoized Solutions: ${memo.size}`)
     console.log(`Memoized Hits: ${memoHits}`)
     return finalSolution
