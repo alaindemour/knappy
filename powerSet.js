@@ -3,14 +3,9 @@
  */
 
 "use strict"
-
-
-
-
 const _ = require('lodash')
 
-
-// Fast powerset computation
+// Fast powerset computation, no dependencies on anything
 function powerSet(input) {
   let accu = [[]]
   const len = input.length
@@ -18,6 +13,7 @@ function powerSet(input) {
     let ele = input[i]
     const acculen = accu.length
     for (let j = 0; j < acculen; j++){
+      // use concat because we need a brand new array each time, push would be in place and would not do the job here
       let newarray = accu[j].concat([ele])
       accu.push(newarray)
     }
