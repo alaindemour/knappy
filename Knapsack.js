@@ -5,7 +5,7 @@
 "use strict"
 const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
-const list = require('./list')
+const _ = require('lodash')
 
 
 class Knapsack {
@@ -17,7 +17,6 @@ class Knapsack {
 
     let capacity = this.capacity
     let numberOfPicks = listOfItems.length
-
     // position zero unused in this memo table, just to keep the mapping clear and obivious
     let memo = []
     for (let i = 0; i <= listOfItems.length; i++) {
@@ -25,24 +24,23 @@ class Knapsack {
     }
     let memoHits = 0
 
-    // The listOfItem is assumed to be sorted in decreasing benfits (most benefit first)
-    // before this method is called.
     function bestMax(listOfItems, capacity, numberOfPicks) {
 
+      // Base case stops the recursion
       if (numberOfPicks === 0 || capacity === 0) {
         return [{cumul: 0, item: null}]
       }
 
+      // General recursive case
       let currentItem = listOfItems[numberOfPicks - 1]
 
       if (currentItem.cost > capacity) {
         return bestMax(listOfItems, capacity, numberOfPicks - 1)
       }
-
       let A = bestMax(listOfItems, capacity - currentItem.cost, numberOfPicks - 1)
-      let pathAbenefit = A[A.length - 1].cumul + currentItem.benefit
       let B = bestMax(listOfItems, capacity, numberOfPicks - 1)
-      let pathBbenefit = B[B.length - 1].cumul
+      let pathAbenefit = _.last(A).cumul + currentItem.benefit
+      let pathBbenefit = _.last(B).cumul
 
       let result
       if (pathBbenefit > pathAbenefit) {
@@ -52,14 +50,12 @@ class Knapsack {
         A.push({cumul: pathAbenefit, item: currentItem})
         result = A
       }
-
       return result
     }
 
     let finalSolution = bestMax(listOfItems, capacity, numberOfPicks)
     console.log(`Memoized Hits: ${memoHits}`)
     return finalSolution
-
   }
 
   // brute for is simple if  very inefficient, to be used to unit testing the faster but more bug-prone versions
