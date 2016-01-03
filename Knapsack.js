@@ -26,9 +26,18 @@ class Knapsack {
 
     function bestMax(listOfItems, capacity, numberOfPicks) {
 
+      let hit = memo[numberOfPicks][capacity]
+      if (hit) {
+        memoHits++
+        return hit
+      }
+
+
       // Base case stops the recursion
       if (numberOfPicks === 0 || capacity === 0) {
-        return [{cumul: 0, item: null}]
+        let result = [{cumul: 0, item: null}]
+        memo[numberOfPicks][capacity] = result
+        return result
       }
 
       // General recursive case
@@ -48,6 +57,7 @@ class Knapsack {
       }
       else {
         result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
+        memo[numberOfPicks][capacity] = result
       }
       return result
     }
