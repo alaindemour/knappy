@@ -94,7 +94,7 @@ describe('knapsack', () => {
   describe('When computing knapsack recursive with the singleton item1', () => {
     it('the benefit shoudl be 60 and the list contains onl item1', () => {
       let result = target.zeroOneKnapsackRecursive(singleton)
-      assert.equal(60, result[0].compoundedBenefit)
+      assert.equal(60, result[0].sum)
     })
   })
 
@@ -103,7 +103,7 @@ describe('knapsack', () => {
   describe('When computing knapsack recursive with the pair [item1,item2]', () => {
     it('the benefit shoudl be 160 and the list contains onl item1 item2', () => {
       let result = target.zeroOneKnapsackRecursive(pair)
-      assert.equal(160, result[0].compoundedBenefit)
+      assert.equal(160, result[0].sum)
     })
   })
 
@@ -113,7 +113,7 @@ describe('knapsack', () => {
   describe('When computing knapsack recursive with the truplet [item1,item2,item3]', () => {
     it('the benefit shoudl be 220 and the list contains onl item1 item3', () => {
       let result = target.zeroOneKnapsackRecursive(triplet)
-      assert.equal(220, result[0].compoundedBenefit)
+      assert.equal(220, result[0].sum)
     })
   })
 

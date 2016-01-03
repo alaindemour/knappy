@@ -13,7 +13,6 @@ class Knapsack {
     this.capacity = params.capacity
   }
 
-  // The list of items can be unsorted, we will sort
   zeroOneKnapsackRecursive(listOfItems) {
 
     let capacity = this.capacity
@@ -21,7 +20,7 @@ class Knapsack {
 
     // position zero unused in this memo table, just to keep the mapping clear and obivious
     let memo = []
-    for (let i = 0 ; i <= listOfItems.length ; i++) {
+    for (let i = 0; i <= listOfItems.length; i++) {
       memo[i] = []
     }
     let memoHits = 0
@@ -30,51 +29,34 @@ class Knapsack {
     // before this method is called.
     function bestMax(listOfItems, capacity, numberOfPicks) {
 
-      let item = listOfItems[numberOfPicks - 1]
-
-      // Base Cases
-      if (numberOfPicks === 0 || capacity <= 0) {
-        return [{compoundedBenefit: 0, item : null}]
+      if (numberOfPicks === 0 || capacity === 0) {
+        return [{sum: 0, item: null}]
       }
 
-      // normal base case which ends recursion
-      if (numberOfPicks === 1) {
-        if (item.cost <= capacity) {
-          memo[numberOfPicks][capacity] = [{compoundedBenefit: item.benefit, item: item}]
-          return [{compoundedBenefit: item.benefit, item: item}]
-        }
-        else {
-          memo[numberOfPicks][capacity]= [{compoundedBenefit: 0, item: null}]
-          return [{compoundedBenefit: 0, item: null}]
-        }
+      let currentItem = listOfItems[numberOfPicks - 1]
+
+      if (currentItem.cost > capacity) {
+        return bestMax(listOfItems, capacity, numberOfPicks - 1)
       }
 
-      // memoized case, we have already computed this subproblem
-      let solution = memo[numberOfPicks][capacity]
-      if (solution) {
-        memoHits++
-        return solution
-      }
+      let A = bestMax(listOfItems, capacity - currentItem.cost, numberOfPicks - 1)
+      let pathAbenefit = A[0].sum + currentItem.benefit
+      let B = bestMax(listOfItems, capacity, numberOfPicks - 1)
+      let pathBbenefit = B[0].sum
 
-      // general case
-      let pathA = bestMax(listOfItems, capacity, numberOfPicks - 1)
-      let pathB = bestMax(listOfItems, capacity - item.cost, numberOfPicks - 1)
-      let totalBenefitB = pathB[0].compoundedBenefit + item.benefit
-      let max = null
-
-      if (pathA[0].compoundedBenefit > totalBenefitB) {
-        max = pathA
+      let result
+      if (pathBbenefit > pathAbenefit) {
+        result = B
       }
       else {
-        pathB.unshift({compoundedBenefit: totalBenefitB, item: item})
-        max = pathB
+        A.unshift({sum: pathAbenefit, item: currentItem})
+        result = A
       }
-      memo[numberOfPicks][capacity] = max
-      return max
+
+      return result
     }
 
-    let sorted = listOfItems.sort()
-    let finalSolution = bestMax(sorted, capacity, numberOfPicks)
+    let finalSolution = bestMax(listOfItems, capacity, numberOfPicks)
     console.log(`Memoized Hits: ${memoHits}`)
     return finalSolution
 
