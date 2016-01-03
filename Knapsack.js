@@ -23,6 +23,7 @@ class Knapsack {
       memo[i] = []
     }
     let memoHits = 0
+    let complexity = 0
 
     function bestMax(listOfItems, capacity, numberOfPicks) {
 
@@ -32,7 +33,7 @@ class Knapsack {
         return hit
       }
 
-
+      complexity++
       // Base case stops the recursion
       if (numberOfPicks === 0 || capacity === 0) {
         let result = [{cumul: 0, item: null}]
@@ -64,6 +65,8 @@ class Knapsack {
 
     let finalSolution = bestMax(listOfItems, capacity, numberOfPicks)
     console.log(`Memoized Hits: ${memoHits}`)
+    console.log(`recursive complexity: ${complexity}`)
+    console.log(`bottom up complexity: ${listOfItems.length * capacity}`)
     return finalSolution
   }
 

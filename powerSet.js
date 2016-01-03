@@ -7,6 +7,7 @@ const _ = require('lodash')
 
 // Fast powerset computation, no dependencies on anything
 function powerSet(input) {
+  let complexity = 0
   let accu = [[]]
   const len = input.length
   for (let i = 0; i < len; i++) {
@@ -15,9 +16,11 @@ function powerSet(input) {
     for (let j = 0; j < acculen; j++){
       // use concat because we need a brand new array each time, push would be in place and would not do the job here
       let newarray = accu[j].concat([ele])
+      complexity++
       accu.push(newarray)
     }
   }
+  console.log(`Powerset complexity ${complexity}`)
   return accu
 }
 
