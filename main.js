@@ -34,7 +34,7 @@ let x = [item1, item2,item3,item4]
 
 let result = target.zeroOneKnapsackRecursive(x)
 
-let totalBenefit = result[0].sum
+let totalBenefit = result[0].cumul
 
 console.log(`totalBenefit : ${totalBenefit}`)
 console.log(result)
