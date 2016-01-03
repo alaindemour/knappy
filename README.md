@@ -1,2 +1,2 @@
 # knappy
-musings on knapsack problems
+musings on knapsack problem
