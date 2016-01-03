@@ -72,13 +72,14 @@ describe('set of all the subsets', () => {
 
 describe('knapsack', () => {
 
-  let target = new Knapsack({capacity : 50})
+  let target = new Knapsack({capacity: 50})
 
-  let item1 = new Item({benefit: 60, cost:10})
-  let item2 = new Item({benefit: 100, cost: 20})
-  let item3 = new Item({benefit: 120, cost: 30})
-  let item4 = new Item({benefit: 90, cost: 10})
-
+  let item1 = new Item({benefit: 60, cost: 10, name: 'item1'})
+  let item2 = new Item({benefit: 100, cost: 20, name: 'item2'})
+  let item3 = new Item({benefit: 120, cost: 30, name: 'item3'})
+  let item4 = new Item({benefit: 90, cost: 10, name: 'item4'})
+  let item5 = new Item({benefit: 75, cost: 13, name: 'item5'})
+  let item6 = new Item({benefit: 110, cost: 10, name: 'item6'})
 
   let offer = [item1, item2, item3]
 
@@ -94,29 +95,42 @@ describe('knapsack', () => {
   describe('When computing knapsack recursive with the singleton item1', () => {
     it('the benefit shoudl be 60 and the list contains onl item1', () => {
       let result = target.zeroOneKnapsackRecursive(singleton)
-      assert.equal(60, result[result.length -1].cumul)
+      assert.equal(60, result[result.length - 1].cumul)
     })
   })
 
-  let pair = [item1,item2]
+  let pair = [item1, item2]
 
   describe('When computing knapsack recursive with the pair [item1,item2]', () => {
     it('the benefit shoudl be 160 and the list contains onl item1 item2', () => {
       let result = target.zeroOneKnapsackRecursive(pair)
-      assert.equal(160, result[result.length -1].cumul)
+      assert.equal(160, result[result.length - 1].cumul)
     })
   })
 
 
-  let triplet = [item1,item2,item3]
+  let triplet = [item1, item2, item3]
 
   describe('When computing knapsack recursive with the truplet [item1,item2,item3]', () => {
     it('the benefit shoudl be 220 and the list contains onl item1 item3', () => {
       let result = target.zeroOneKnapsackRecursive(triplet)
-      assert.equal(220, result[result.length -1].cumul)
+      assert.equal(220, result[result.length - 1].cumul)
     })
   })
 
+  let sextet = [item1, item2, item3, item4, item5, item6]
+
+
+  describe('When computing knapsack recursive with the sextet [item1,item2,item3,item4,item5,item6]', () => {
+    it('the benefit shoudl be 260 and should be identical whether computed using recursive and bruteforce', () => {
+
+      let smallerKnapsack = new Knapsack({capacity: 30})
+
+      let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
+      let bruteForceResult = smallerKnapsack.bruteForce(sextet)
+      assert.equal(260, _.last(recResult).cumul)
+      assert.equal(260, bruteForceResult.benefit)
+    })
+
+  })
 })
-
-
