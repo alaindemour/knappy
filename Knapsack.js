@@ -39,16 +39,15 @@ class Knapsack {
       }
       let A = bestMax(listOfItems, capacity - currentItem.cost, numberOfPicks - 1)
       let B = bestMax(listOfItems, capacity, numberOfPicks - 1)
-      let pathAbenefit = _.last(A).cumul + currentItem.benefit
-      let pathBbenefit = _.last(B).cumul
+      let pathAbenefit = A[0].cumul + currentItem.benefit
+      let pathBbenefit = B[0].cumul
 
       let result
       if (pathBbenefit > pathAbenefit) {
         result = B
       }
       else {
-        A.push({cumul: pathAbenefit, item: currentItem})
-        result = A
+        result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
       }
       return result
     }
@@ -73,6 +72,7 @@ class Knapsack {
     }
     return max
   }
+
 }
 
 
