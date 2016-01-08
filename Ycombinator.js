@@ -6,10 +6,8 @@
 
 
 function Y(f) {
-
-    
-    var g = f((h => x => f(h(h))(x)) (h => x => f(h(h))(x)))
-    return g
+    let foo = (h => x => f(h(h))(x))
+    return f(foo(foo))
 }
 
 
