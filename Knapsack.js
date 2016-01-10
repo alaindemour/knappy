@@ -13,7 +13,7 @@ class Knapsack {
     this.capacity = params.capacity
   }
 
-  zeroOneKnapsackRecursive(listOfItems) {
+  zeroOneKnapsackRecursiveMemo(listOfItems) {
 
     let capacity = this.capacity
     let numberOfPicks = listOfItems.length

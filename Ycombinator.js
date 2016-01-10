@@ -4,40 +4,21 @@
 
 "use strict"
 
-
 function Y(f) {
-    let foo = (h => x => f(h(h))(x))
-    return f(foo(foo))
+    return f((x,y,z) => Y(f)(x,y,z))
 }
 
 
-var fac = Y(function(f) {
-    return function (n) {
-        return n > 1 ? n * f(n - 1) : 1
+var fac = Y(function(pre) {
+    return function (n,y,z) {
+        return n > 1 ? n * pre(n - 1,y,z) : 1
     }
 })
 
 
-//function Y(f) {
-//    let g =  x => f(y => (x(x))(y))
-//    return g(g)
-//}
 
-
-
-//function fa(f) {
-//
-//    let foo = function foo(x) {
-//        if (x === 0) return 1
-//        x * f(x - 1)
-//    }
-//    return foo
-//}
-//
-//
-//let boo = Y(fa)
-//let result = boo(3)
-
-let result = fac(3)
+let result = fac(4,'sss')
 
 console.log(result)
+
+
