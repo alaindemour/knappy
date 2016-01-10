@@ -72,36 +72,32 @@ class Knapsack {
 
 
   zeroOneKnapsackRecursive(listOfItems) {
+
     let capacity = this.capacity
     let numberOfPicks = listOfItems.length
+
     function bestMax(capacity, numberOfPicks) {
       // Base case stops the recursion
       if (numberOfPicks === 0 || capacity === 0) {
-        let result = [{cumul: 0, item: null}]
-        return result
+        return [{cumul: 0, item: null}]
       }
+
       // General recursive case
       let currentItem = listOfItems[numberOfPicks - 1]
       if (currentItem.cost > capacity) {
         return bestMax(capacity, numberOfPicks - 1)
       }
+
       let A = bestMax(capacity - currentItem.cost, numberOfPicks - 1)
       let B = bestMax(capacity, numberOfPicks - 1)
       let pathAbenefit = A[0].cumul + currentItem.benefit
       let pathBbenefit = B[0].cumul
 
-      let result
-      if (pathBbenefit > pathAbenefit) {
-        result = B
-      }
-      else {
-        result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
-      }
-      return result
+      return   pathBbenefit > pathAbenefit ? B : [{cumul: pathAbenefit, item: currentItem}].concat(A)
     }
 
-    let finalSolution = bestMax(capacity, numberOfPicks)
-    return finalSolution
+    return bestMax(capacity, numberOfPicks)
+
   }
 
 
