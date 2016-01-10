@@ -25,7 +25,7 @@ class Knapsack {
     let memoHits = 0
     let complexity = 0
 
-    function bestMax(listOfItems, capacity, numberOfPicks) {
+    function bestMax(capacity, numberOfPicks) {
 
       let hit = memo[numberOfPicks][capacity]
       if (hit) {
@@ -45,10 +45,10 @@ class Knapsack {
       let currentItem = listOfItems[numberOfPicks - 1]
 
       if (currentItem.cost > capacity) {
-        return bestMax(listOfItems, capacity, numberOfPicks - 1)
+        return bestMax(capacity, numberOfPicks - 1)
       }
-      let A = bestMax(listOfItems, capacity - currentItem.cost, numberOfPicks - 1)
-      let B = bestMax(listOfItems, capacity, numberOfPicks - 1)
+      let A = bestMax(capacity - currentItem.cost, numberOfPicks - 1)
+      let B = bestMax(capacity, numberOfPicks - 1)
       let pathAbenefit = A[0].cumul + currentItem.benefit
       let pathBbenefit = B[0].cumul
 
@@ -63,7 +63,7 @@ class Knapsack {
       return result
     }
 
-    let finalSolution = bestMax(listOfItems, capacity, numberOfPicks)
+    let finalSolution = bestMax(capacity, numberOfPicks)
     console.log(`Memoized Hits: ${memoHits}`)
     console.log(`recursive complexity: ${complexity}`)
     console.log(`bottom up complexity: ${listOfItems.length * capacity}`)
