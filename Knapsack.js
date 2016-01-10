@@ -70,6 +70,41 @@ class Knapsack {
     return finalSolution
   }
 
+
+  zeroOneKnapsackRecursive(listOfItems) {
+    let capacity = this.capacity
+    let numberOfPicks = listOfItems.length
+    function bestMax(listOfItems, capacity, numberOfPicks) {
+      // Base case stops the recursion
+      if (numberOfPicks === 0 || capacity === 0) {
+        let result = [{cumul: 0, item: null}]
+        return result
+      }
+      // General recursive case
+      let currentItem = listOfItems[numberOfPicks - 1]
+      if (currentItem.cost > capacity) {
+        return bestMax(listOfItems, capacity, numberOfPicks - 1)
+      }
+      let A = bestMax(listOfItems, capacity - currentItem.cost, numberOfPicks - 1)
+      let B = bestMax(listOfItems, capacity, numberOfPicks - 1)
+      let pathAbenefit = A[0].cumul + currentItem.benefit
+      let pathBbenefit = B[0].cumul
+
+      let result
+      if (pathBbenefit > pathAbenefit) {
+        result = B
+      }
+      else {
+        result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
+      }
+      return result
+    }
+
+    let finalSolution = bestMax(listOfItems, capacity, numberOfPicks)
+    return finalSolution
+  }
+
+
   // brute for is simple if  very inefficient, to be used to unit testing the faster but more bug-prone versions
   bruteForce(listOfItems) {
     let max = new Item({benefit: 0, cost: 0})

@@ -131,6 +131,17 @@ describe('knapsack', () => {
       assert.equal(260, recResult[0].cumul)
       assert.equal(260, bruteForceResult.benefit)
     })
-
   })
+
+  describe('When computing knapsack recursive with the sextet [item1,item2,item3,item4,item5,item6]', () => {
+    it('the benefit shoudl be 260 and should be identical whether computed using recursive and recursive memo', () => {
+      let smallerKnapsack = new Knapsack({capacity: 30})
+
+      let recMemoResult = smallerKnapsack.zeroOneKnapsackRecursiveMemo(sextet)
+      let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
+      assert.equal(260, recResult[0].cumul)
+      assert.equal(260, recMemoResult[0].cumul)
+    })
+  })
+
 })
