@@ -30,7 +30,7 @@ class TrieCache {
         return current
     }
 
-    // note that this is the opposite calling conversion as ES6 Maps
+    // note that this is the opposite calling convention as the one used in ES6 Maps
     set(value, ...theKeys) {
         if (theKeys.length !== this.dimension) {
             throw new Error(`dimension mistmatch on the TrieCache`)
