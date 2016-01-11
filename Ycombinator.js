@@ -4,9 +4,34 @@
 
 "use strict"
 
-function Y(f) {
-    return f((x,y,z) => Y(f)(x,y,z))
+// Setup of the memo hash, we only pre-allocate one dimension: the smaller one
+
+
+
+
+
+function memoY(dimension) {
+
+    let memo = []
+    for (let i = 0; i <= dimension ; i++) {
+        memo[i] = []
+    }
+    let memoHits = 0
+
+    return function Y(f) {
+        return f((x, y) => {
+            let hit = memo[x][y]
+            if (hit) {
+                memoHits++
+                return hit
+            }
+            let result = Y(f)(x, y)
+            memo[x][y] = result
+            return result
+        })
+    }
 }
+
 
 
 var fac = Y(function(pre) {

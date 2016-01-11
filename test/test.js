@@ -12,6 +12,8 @@ const allSubSetsOfSize = sets.allSubSetsOfSize
 const powerSet = sets.powerSet
 const Knapsack = require('../Knapsack')
 const Item = require('../Item')
+const TrieCache = require('../TrieCache')
+
 
 describe('subsets of a given sizes', () => {
 
