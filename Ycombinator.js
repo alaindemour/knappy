@@ -20,7 +20,12 @@ function  memoY(f) {
 
     function cachingY(f) {
         return f((...params) => {
+            let memoizedResult = memo.get(...params)
+            if (memoizedResult) {
+                return memoizedResult
+            }
             let result = cachingY(f)(...params)
+            memo.set(result,...params)
             return result
         })
     }

@@ -145,24 +145,24 @@ describe ('YCombinator', function() {
     describe('After using a pseudoY combinator style operator to generate a recursive factorial function', function() {
 
         function preFac(pre) {
-            return (n, ...rest) =>  n > 1 ? n * pre(n - 1, ...rest) : 1
+            return (n) =>  n > 1 ? n * pre(n - 1) : 1
         }
         let fac = pseudoY(preFac)
 
         it('should compute fact(5) as 120', function() {
-            let x = fac(5,'random string parameter')
+            let x = fac(5)
             assert.equal(x,120)
         })
-        it('should compute fact(4) with arbitrarily trailing arguments as 24', function() {
-            let x = fac(4,'random string parameter')
+        it('should compute fact(4) as 24', function() {
+            let x = fac(4)
             assert.equal(x,24)
         })
-        it('should compute fact(0) with arbitrarily trailing arguments as 1', function() {
-            let x = fac(0,'random string parameter')
+        it('should compute fact(0) as 1', function() {
+            let x = fac(0)
             assert.equal(x,1)
         })
-        it('should compute fact(1) with arbitrarily trailing arguments as 1', function() {
-            let x = fac(1,'random string parameter')
+        it('should compute fact(1) as 1', function() {
+            let x = fac(1)
             assert.equal(x,1)
         })
     })
@@ -171,7 +171,7 @@ describe ('YCombinator', function() {
 
 
         function preFib(pre) {
-            return function(n,...rest){
+            return function(n){
                 if (n === 0) return 0
                 if (n === 1) return 1
                 return pre(n-1) + pre(n-2)
@@ -180,24 +180,24 @@ describe ('YCombinator', function() {
 
         let fib = pseudoY(preFib)
 
-        it('should compute fib(0) with arbitrarily trailing arguments as 0', function() {
-            let x = fib(0,'random string parameter')
+        it('should compute fib(0) as 0', function() {
+            let x = fib(0)
             assert.equal(x,0)
         })
-        it('should compute fib(1) with arbitrarily trailing arguments as 1', function() {
-            let x = fib(1,'random string parameter')
+        it('should compute fib(1) as 1', function() {
+            let x = fib(1)
             assert.equal(x,1)
         })
-        it('should compute fib(3) with arbitrarily trailing arguments as 2', function() {
-            let x = fib(3,'random string parameter')
+        it('should compute fib(3) as 2', function() {
+            let x = fib(3)
             assert.equal(x,2)
         })
-        it('should compute fib(4) with arbitrarily trailing arguments as 3', function() {
-            let x = fib(4,'random string parameter')
+        it('should compute fib(4) as 3', function() {
+            let x = fib(4)
             assert.equal(x,3)
         })
-        it('should compute fib(5) with arbitrarily trailing arguments as 5', function() {
-            let x = fib(5,'random string parameter')
+        it('should compute fib(5) as 5', function() {
+            let x = fib(5)
             assert.equal(x,5)
         })
     })
@@ -206,24 +206,24 @@ describe ('YCombinator', function() {
     describe('After using a memoY combinator style operator to generate a recursive factorial function', function() {
 
         function preFac(pre) {
-            return (n, ...rest) =>  n > 1 ? n * pre(n - 1, ...rest) : 1
+            return (n) =>  n > 1 ? n * pre(n - 1) : 1
         }
         let fac = memoY(preFac)
 
         it('should compute fact(5) as 120', function() {
-            let x = fac(5,'random string parameter')
+            let x = fac(5)
             assert.equal(x,120)
         })
-        it('should compute fact(4) with arbitrarily trailing arguments as 24', function() {
-            let x = fac(4,'random string parameter')
+        it('should compute fact(4) as 24', function() {
+            let x = fac(4)
             assert.equal(x,24)
         })
-        it('should compute fact(0) with arbitrarily trailing arguments as 1', function() {
-            let x = fac(0,'random string parameter')
+        it('should compute fact(0) as 1', function() {
+            let x = fac(0)
             assert.equal(x,1)
         })
-        it('should compute fact(1) with arbitrarily trailing arguments as 1', function() {
-            let x = fac(1,'random string parameter')
+        it('should compute fact(1) as 1', function() {
+            let x = fac(1)
             assert.equal(x,1)
         })
     })
@@ -232,7 +232,7 @@ describe ('YCombinator', function() {
 
 
         function preFib(pre) {
-            return function(n,...rest){
+            return function(n){
                 if (n === 0) return 0
                 if (n === 1) return 1
                 return pre(n-1) + pre(n-2)
@@ -241,24 +241,24 @@ describe ('YCombinator', function() {
 
         let fib = memoY(preFib)
 
-        it('should compute fib(0) with arbitrarily trailing arguments as 0', function() {
-            let x = fib(0,'random string parameter')
+        it('should compute fib(0) as 0', function() {
+            let x = fib(0)
             assert.equal(x,0)
         })
-        it('should compute fib(1) with arbitrarily trailing arguments as 1', function() {
-            let x = fib(1,'random string parameter')
+        it('should compute fib(1) as 1', function() {
+            let x = fib(1)
             assert.equal(x,1)
         })
-        it('should compute fib(3) with arbitrarily trailing arguments as 2', function() {
-            let x = fib(3,'random string parameter')
+        it('should compute fib(3) as 2', function() {
+            let x = fib(3)
             assert.equal(x,2)
         })
-        it('should compute fib(4) with arbitrarily trailing arguments as 3', function() {
-            let x = fib(4,'random string parameter')
+        it('should compute fib(4) as 3', function() {
+            let x = fib(4)
             assert.equal(x,3)
         })
-        it('should compute fib(5) with arbitrarily trailing arguments as 5', function() {
-            let x = fib(5,'random string parameter')
+        it('should compute fib(5) as 5', function() {
+            let x = fib(5)
             assert.equal(x,5)
         })
     })
