@@ -9,7 +9,7 @@ const _ = require('lodash')
 const Ycombinator = require('./Ycombinator')
 
 const pseudoY = Ycombinator.pseudoY
-const memoY =  Ycombinator.memoY
+const memoY = Ycombinator.memoY
 
 
 class Knapsack {
@@ -142,8 +142,9 @@ class Knapsack {
         let capacity = this.capacity
         let numberOfPicks = listOfItems.length
         let bestMax = memoY(preBestMax)
-        return bestMax(capacity, numberOfPicks)
-
+        let result = bestMax(capacity, numberOfPicks)
+        console.log(`all memo hits: ${bestMax.getHits()}`)
+        return result
 
         function preBestMax(pre) {
             return function (capacity, numberOfPicks) {
@@ -167,6 +168,8 @@ class Knapsack {
             }
         }
     }
+
+
 
 
     // brute for is simple if  very inefficient, to be used to unit testing the faster but more bug-prone versions

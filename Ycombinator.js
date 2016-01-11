@@ -29,7 +29,10 @@ function  memoY(f) {
             return result
         })
     }
-    return cachingY(f)
+
+    let result = cachingY(f)
+    result.getHits = () => memo.sucessfulHits
+    return result
 }
 
 module.exports = {

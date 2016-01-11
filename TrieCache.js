@@ -9,6 +9,8 @@
 class TrieCache {
 
     constructor() {
+
+        this.sucessfulHits = 0
         // set and get replace themselves after a first usage
         this.get = (...theKeys) => {
             this.map = new Map()
@@ -38,6 +40,7 @@ class TrieCache {
                 i++
                 if (!current) return undefined
             }
+            this.sucessfulHits++
             return current
         }
 
