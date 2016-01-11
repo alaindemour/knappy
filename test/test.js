@@ -140,32 +140,70 @@ describe('TrieCache', () => {
 
 describe ('YCombinator', function() {
 
-    function preFac(pre) {
-        return function (n, ...rest) {
-            return n > 1 ? n * pre(n - 1, ...rest) : 1
-        }
-    }
-
-    let fac = Y(preFac)
 
     describe('After using a Y combinator style operator to generate a recursive factorial function', function() {
+
+        function preFac(pre) {
+            return function (n, ...rest) {
+                return n > 1 ? n * pre(n - 1, ...rest) : 1
+            }
+        }
+
+        let fac = Y(preFac)
+
         it('should compute fact(5) as 120', function() {
             let x = fac(5,'random string parameter')
             assert.equal(x,120)
         })
-        it('should compute fact(4) with arbitrarily trailing argument as 24', function() {
+        it('should compute fact(4) with arbitrarily trailing arguments as 24', function() {
             let x = fac(4,'random string parameter')
             assert.equal(x,24)
         })
-        it('should compute fact(0) with arbitrarily trailing argument as 1', function() {
+        it('should compute fact(0) with arbitrarily trailing arguments as 1', function() {
             let x = fac(0,'random string parameter')
             assert.equal(x,1)
         })
-        it('should compute fact(1) with arbitrarily trailing argument as 1', function() {
+        it('should compute fact(1) with arbitrarily trailing arguments as 1', function() {
             let x = fac(1,'random string parameter')
             assert.equal(x,1)
         })
     })
+
+    describe('After generate a recrusive fibonacci function with the pseudo Y combinator', function() {
+
+
+        function preFib(pre) {
+            return function(n,...rest){
+                if (n === 0) return 0
+                if (n === 1) return 1
+                return pre(n-1) + pre(n-2)
+            }
+        }
+
+        let fib = Y(preFib)
+
+        it('should compute fib(0) with arbitrarily trailing arguments as 0', function() {
+            let x = fib(0,'random string parameter')
+            assert.equal(x,0)
+        })
+        it('should compute fib(1) with arbitrarily trailing arguments as 1', function() {
+            let x = fib(1,'random string parameter')
+            assert.equal(x,1)
+        })
+        it('should compute fib(3) with arbitrarily trailing arguments as 2', function() {
+            let x = fib(3,'random string parameter')
+            assert.equal(x,2)
+        })
+        it('should compute fib(4) with arbitrarily trailing arguments as 3', function() {
+            let x = fib(4,'random string parameter')
+            assert.equal(x,3)
+        })
+        it('should compute fib(5) with arbitrarily trailing arguments as 5', function() {
+            let x = fib(5,'random string parameter')
+            assert.equal(x,5)
+        })
+    })
+
 
 })
 
