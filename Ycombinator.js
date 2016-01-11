@@ -4,14 +4,27 @@
 
 "use strict"
 
-// Pseudo Y combinator
-function Y(f) {
+const TrieCache = require('./TrieCache')
+
+// Pseudo pseudoY combinator
+function pseudoY(f) {
     return f((...params) => {
-        let result = Y(f)(...params)
+        let result = pseudoY(f)(...params)
         return result
     })
 }
 
+function  memoY(f) {
+    let memo = new TrieCache(f.length)
+    function cachingY(f) {
+        return f((...params) => {
+            let result = cachingY(f)(...params)
+            return result
+        })
+    }
+    return cachingY(f)
+}
 
-module.exports = Y
+
+module.exports = pseudoY
 
