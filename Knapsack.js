@@ -72,6 +72,7 @@ class Knapsack {
     }
 
 
+    // For testing and performance comparisons
     zeroOneKnapsackRecursive(listOfItems) {
 
         let capacity = this.capacity
@@ -99,7 +100,7 @@ class Knapsack {
         }
     }
 
-
+    // For testing and performance comparisons
     zeroOneKnapsackRecursiveY(listOfItems) {
 
         let capacity = this.capacity
