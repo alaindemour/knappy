@@ -25,6 +25,10 @@ function  memoY(f) {
     return cachingY(f)
 }
 
+module.exports = {
+    pseudoY
+    ,memoY
+}
 
-module.exports = pseudoY
+
 

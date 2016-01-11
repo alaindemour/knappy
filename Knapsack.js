@@ -6,7 +6,8 @@
 const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
 const _ = require('lodash')
-const Y = require('./Ycombinator')
+const pseudoY = require('./Ycombinator').pseudoY
+
 
 
 class Knapsack {
@@ -105,7 +106,7 @@ class Knapsack {
 
         let capacity = this.capacity
         let numberOfPicks = listOfItems.length
-        let bestMax = Y(preBestMax)
+        let bestMax = pseudoY(preBestMax)
         return bestMax(capacity, numberOfPicks)
 
 
