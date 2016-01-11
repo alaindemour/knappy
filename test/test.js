@@ -76,28 +76,28 @@ describe(`powerset`, () => {
 
 
 describe('TrieCache', () => {
-    let cache = new TrieCache(3)
+    let cache = new TrieCache(4)
     let smallcache = new TrieCache(1)
 
     describe('When looking up an element at coordinate never hit yet', () =>{
         it('shoud return undefined', () => {
-            let x = cache.get(2, 35, 4)
+            let x = cache.get(2, 35, 4,9)
             assert.equal(x,undefined)
         })
     })
 
     describe('When setting  an element at coordinates never hit yet, then retrieving it', () =>{
         it('shoud return the element', () => {
-            cache.set("Boo", 2, 36, 5)
-            let y = cache.get(2, 36, 5)
+            cache.set("Boo", 2, 36, 5,9)
+            let y = cache.get(2, 36, 5,9)
             assert.equal(y, "Boo")
         })
     })
 
     describe('When setting  an element at coordinates already set, then retrieving it', () =>{
         it('shoud return the  latest element', () => {
-            cache.set("Baa", 2, 36, 5)
-            let y = cache.get(2, 36, 5)
+            cache.set("Baa", 2, 36, 5,9)
+            let y = cache.get(2, 36, 5,9)
             assert.equal(y, "Baa")
         })
     })
