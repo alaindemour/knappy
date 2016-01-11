@@ -4,7 +4,7 @@
 
 "use strict"
 
-// Setup of the memo hash, we only pre-allocate one dimension: the smaller one
+// Pseudo Y combinator
 function Y(f) {
     return f((x, y) => {
         let result = Y(f)(x, y)
@@ -12,19 +12,7 @@ function Y(f) {
     })
 }
 
-//function preFac(pre) {
-//    return function (n, ...rest) {
-//        return n > 1 ? n * pre(n - 1, ...rest) : 1
-//    }
-//}
-//
-//let fac = Y(preFac)
-//
-//
-//
-//let result = fac(4, 'sss')
-//
-//console.log(result)
+
 
 module.exports = Y
 
