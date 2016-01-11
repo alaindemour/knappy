@@ -8,8 +8,6 @@
 
 
 
-
-
 function memoY(dimension) {
 
     let memo = []

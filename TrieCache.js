@@ -99,3 +99,5 @@ z = smallcache.get(8)
 
 console.log(z)
 
+
+module.exports = TrieCache
