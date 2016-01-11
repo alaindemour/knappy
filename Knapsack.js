@@ -6,7 +6,11 @@
 const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
 const _ = require('lodash')
-const pseudoY = require('./Ycombinator').pseudoY
+const Ycombinator = require('./Ycombinator')
+
+const pseudoY = Ycombinator.pseudoY
+const memoY =  Ycombinator.memoY
+
 
 
 
