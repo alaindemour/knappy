@@ -56,48 +56,8 @@ class TrieCache {
 }
 
 
-let cache = new TrieCache(3)
-
-let x = cache.get(2, 35, 4)
-
-cache.set("A", 2, 36, 5)
-
-let y = cache.get(2, 36, 5)
-
-console.log(y)
-
-cache.set("B",2, 36, 5)
-
-y = cache.get(2,36,5)
-
-console.log(y)
-
-try {
-    x = cache.get(4, 5)
-}
-catch (e) {
-    console.log(e)
-}
 
 
-try {
-    x = cache.get(4, 5,6,7,8)
-}
-catch (e) {
-    console.log(e)
-}
-
-let smallcache = new TrieCache(1)
-
-let z = smallcache.get(3)
-
-console.log(z)
-
-smallcache.set("Boo", 8)
-
-z = smallcache.get(8)
-
-console.log(z)
 
 
 module.exports = TrieCache

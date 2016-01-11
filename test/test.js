@@ -79,29 +79,62 @@ describe('TrieCache', () => {
     let cache = new TrieCache(4)
     let smallcache = new TrieCache(1)
 
-    describe('When looking up an element at coordinate never hit yet', () =>{
+    describe('When looking up an element at coordinate never hit yet', () => {
         it('shoud return undefined', () => {
-            let x = cache.get(2, 35, 4,9)
-            assert.equal(x,undefined)
+            let x = cache.get(2, 35, 4, 9)
+            assert.equal(x, undefined)
         })
     })
 
-    describe('When setting  an element at coordinates never hit yet, then retrieving it', () =>{
+    describe('When setting  an element at coordinates never hit yet, then retrieving it', () => {
         it('shoud return the element', () => {
-            cache.set("Boo", 2, 36, 5,9)
-            let y = cache.get(2, 36, 5,9)
+            cache.set("Boo", 2, 36, 5, 9)
+            let y = cache.get(2, 36, 5, 9)
             assert.equal(y, "Boo")
         })
     })
 
-    describe('When setting  an element at coordinates already set, then retrieving it', () =>{
+    describe('When setting  an element at coordinates already set, then retrieving it', () => {
         it('shoud return the  latest element', () => {
-            cache.set("Baa", 2, 36, 5,9)
-            let y = cache.get(2, 36, 5,9)
+            cache.set("Baa", 2, 36, 5, 9)
+            let y = cache.get(2, 36, 5, 9)
             assert.equal(y, "Baa")
         })
     })
 
+    describe('When using a TrieCache of dimension 1', () => {
+        it('should work like in higher dimensions', () => {
+            let z = smallcache.get(3)
+            assert.equal(z, undefined)
+            smallcache.set("Buu", 8)
+            z = smallcache.get(8)
+            assert.equal(z, "Buu")
+        })
+    })
+
+
+    describe('Trying to lookup an element with coordinates with a number of dimensions less than the TrieMap dimension', function () {
+        it('Should generate a mismatch exception', function () {
+            assert.throws(
+                function () {
+                    x = cache.get(4, 5)
+                },
+                /mistmatch/
+            )
+        })
+    })
+
+
+    describe('Trying to lookup an element with coordinates with a number of dimensions higher than the TrieMap dimension', function () {
+        it('Should generate a mismatch exception', function () {
+            assert.throws(
+                function () {
+                    x = cache.get(4, 5, 6, 7, 8, 8, 9)
+                },
+                /mistmatch/
+            )
+        })
+    })
 
 
 })
