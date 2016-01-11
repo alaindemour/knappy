@@ -6,6 +6,7 @@
 const powerSet = require('./powerSet').powerSet
 const Item = require('./Item')
 const _ = require('lodash')
+const Y = require('./Ycombinator')
 
 
 class Knapsack {
@@ -98,6 +99,37 @@ class Knapsack {
         }
     }
 
+
+    zeroOneKnapsackRecursiveY(listOfItems) {
+
+        let capacity = this.capacity
+        let numberOfPicks = listOfItems.length
+        let bestMax = Y(preBestMax)
+        return bestMax(capacity, numberOfPicks)
+
+
+        function preBestMax(pre) {
+            return function (capacity, numberOfPicks) {
+                // Base case stops the recursion
+                if (numberOfPicks === 0 || capacity === 0) {
+                    return [{cumul: 0, item: null}]
+                }
+
+                // General recursive case
+                let currentItem = listOfItems[numberOfPicks - 1]
+                if (currentItem.cost > capacity) {
+                    return pre(capacity, numberOfPicks - 1)
+                }
+
+                let A = pre(capacity - currentItem.cost, numberOfPicks - 1)
+                let B = pre(capacity, numberOfPicks - 1)
+                let pathAbenefit = A[0].cumul + currentItem.benefit
+                let pathBbenefit = B[0].cumul
+
+                return pathBbenefit > pathAbenefit ? B : [{cumul: pathAbenefit, item: currentItem}].concat(A)
+            }
+        }
+    }
 
     // brute for is simple if  very inefficient, to be used to unit testing the faster but more bug-prone versions
     bruteForce(listOfItems) {
