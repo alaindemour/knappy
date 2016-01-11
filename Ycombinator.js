@@ -6,12 +6,11 @@
 
 // Pseudo Y combinator
 function Y(f) {
-    return f((x, y) => {
-        let result = Y(f)(x, y)
+    return f((...params) => {
+        let result = Y(f)(...params)
         return result
     })
 }
-
 
 
 module.exports = Y
