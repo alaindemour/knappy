@@ -198,6 +198,7 @@ describe ('YCombinator', function() {
         })
         it('should compute fib(5) as 5', function() {
             let x = fib(5)
+            console.log(`all memo hits for FIB 5: ${fib.getHits()}`)
             assert.equal(x,5)
         })
     })
