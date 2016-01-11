@@ -353,15 +353,15 @@ describe('knapsack', () => {
     })
 
 
-    //describe('When computing knapsack recursive with the sextet [item1,item2,item3,item4,item5,item6]', () => {
-    //    it('the benefit shoudl be 260 and should be identical whether computed using recursive and recursive with memoY combinator', () => {
-    //        let smallerKnapsack = new Knapsack({capacity: 30})
-    //
-    //        let YrecResult = smallerKnapsack.zeroOneKnapsackRecursiveMemoY(sextet)
-    //        let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
-    //        assert.equal(260, recResult[0].cumul)
-    //        assert.equal(260, YrecResult[0].cumul)
-    //    })
-    //})
+    describe('When computing knapsack recursive with the sextet [item1,item2,item3,item4,item5,item6]', () => {
+        it('the benefit shoudl be 260 and should be identical whether computed using recursive and recursive with memoY combinator', () => {
+            let smallerKnapsack = new Knapsack({capacity: 30})
+
+            let YrecResult = smallerKnapsack.zeroOneKnapsackRecursiveMemoY(sextet)
+            let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
+            assert.equal(260, recResult[0].cumul)
+            assert.equal(260, YrecResult[0].cumul)
+        })
+    })
 
 })
