@@ -12,8 +12,6 @@ const pseudoY = Ycombinator.pseudoY
 const memoY =  Ycombinator.memoY
 
 
-
-
 class Knapsack {
     constructor(params) {
         this.capacity = params.capacity

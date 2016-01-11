@@ -15,7 +15,9 @@ function pseudoY(f) {
 }
 
 function  memoY(f) {
+
     let memo = new TrieCache(f.length)
+
     function cachingY(f) {
         return f((...params) => {
             let result = cachingY(f)(...params)
