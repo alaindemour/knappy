@@ -13,6 +13,7 @@ const powerSet = sets.powerSet
 const Knapsack = require('../Knapsack')
 const Item = require('../Item')
 const TrieCache = require('../TrieCache')
+const Y = require('../Ycombinator')
 
 
 describe(`powerset`, () => {
@@ -135,7 +136,36 @@ describe('TrieCache', () => {
             )
         })
     })
+})
 
+describe ('YCombinator', function() {
+
+    function preFac(pre) {
+        return function (n, ...rest) {
+            return n > 1 ? n * pre(n - 1, ...rest) : 1
+        }
+    }
+
+    let fac = Y(preFac)
+
+    describe('After using a Y combinator style operator to generate a recursive factorial function', function() {
+        it('should compute fact(5) as 120', function() {
+            let x = fac(5,'random string parameter')
+            assert.equal(x,120)
+        })
+        it('should compute fact(4) with arbitrarily trailing argument as 24', function() {
+            let x = fac(4,'random string parameter')
+            assert.equal(x,24)
+        })
+        it('should compute fact(0) with arbitrarily trailing argument as 1', function() {
+            let x = fac(0,'random string parameter')
+            assert.equal(x,1)
+        })
+        it('should compute fact(1) with arbitrarily trailing argument as 1', function() {
+            let x = fac(1,'random string parameter')
+            assert.equal(x,1)
+        })
+    })
 
 })
 
