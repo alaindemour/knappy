@@ -3,7 +3,7 @@ Musings on knapsack problems.
 That's a recursive and memoized version of the 0 1 problem, which has better time and space complexity than the bottom up dynamic programming approach that is in all textbooks
 
 ## Performance
-This is one of the few problems I found where wone can use a version of the Y combinator for something semi-practical:
+This is one of the few problems I found where one can use a version of the Y combinator for something semi-practical:
 In this case it is to memoize the highly recursive knapsack solution, but doing it cleanly separating the problem logic from the the caching and memozing "plumbing".
 The Y combinator does not add much performance overhead. The performance profile is mostly affected by how performant 
 the multi-dimenstional lookup table used for the cache is. A well sized and optimized one can have a 10x performance difference 
