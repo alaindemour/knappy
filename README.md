@@ -2,13 +2,13 @@
 Musings on knapsack problems.
 That's a recursive and memoized version of the 0 1 problem, which has better time and space complexity than the bottom up dynamic programming approach that is in all textbooks
 
-# Performance
+## Performance
 Interestingly this is one of the rare problem I found where we can use a version of the Y combinator for something practical:
 In this case it is to memoize the highly recursive knapsack solution  but cleanly separating the problem logic from the the caching and memozing "plumbing".
 The Y combinator does not add much performance overhead. The performance profile is mostly affected by how performant 
 the multi-dimenstional lookup table used for the cache is. A well sized and optimized one can have a 10x performance difference 
 with a totally dynamic one sized lazily.
 
-# node version
+## node version
 To run the code you need node 5.4.0 or higher with the harmony flag on as the code uses ES6 rest parameters
 
