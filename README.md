@@ -10,5 +10,5 @@ the multi-dimenstional lookup table used for the cache is. A well sized and opti
 with a totally dynamic one sized lazily.
 
 ## node version
-To run the code you need node 5.4.0 or higher with the harmony flag on as the code uses ES6 rest parameters
+To run the code you need node 5.4.0 or higher with the harmony flag on as the code uses ES6 rest parameters in the Y combinator
 
