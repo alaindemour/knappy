@@ -198,7 +198,6 @@ describe ('YCombinator', function() {
         })
         it('should compute fib(5) as 5', function() {
             let x = fib(5)
-            console.log(`all memo hits for FIB 5: ${fib.getHits()}`)
             assert.equal(x,5)
         })
     })
@@ -240,26 +239,41 @@ describe ('YCombinator', function() {
             }
         }
 
-        let fib = memoY(preFib)
 
         it('should compute fib(0) as 0', function() {
+            let fib = memoY(preFib)
             let x = fib(0)
+            assert.equal(fib.getHits(),0)
             assert.equal(x,0)
         })
         it('should compute fib(1) as 1', function() {
+            let fib = memoY(preFib)
             let x = fib(1)
+            assert.equal(fib.getHits(),0)
+            assert.equal(x,1)
+        })
+        it('should compute fib(2) as 1', function() {
+            let fib = memoY(preFib)
+            let x = fib(1)
+            assert.equal(fib.getHits(),0)
             assert.equal(x,1)
         })
         it('should compute fib(3) as 2', function() {
+            let fib = memoY(preFib)
             let x = fib(3)
+            assert.equal(fib.getHits(),1)
             assert.equal(x,2)
         })
         it('should compute fib(4) as 3', function() {
+            let fib = memoY(preFib)
             let x = fib(4)
+            assert.equal(fib.getHits(),2)
             assert.equal(x,3)
         })
         it('should compute fib(5) as 5', function() {
+            let fib = memoY(preFib)
             let x = fib(5)
+            assert.equal(fib.getHits(),3)
             assert.equal(x,5)
         })
     })
