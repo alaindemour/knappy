@@ -6,7 +6,7 @@
 
 const TrieCache = require('./TrieCache')
 
-// Pseudo Y combinator, more like a fixed point generator, not claim to lambda calculus purity
+// Pseudo Y combinator, more like a fixed point generator, no claim to lambda calculus purity
 function pseudoY(f) {
     return f((...params) => {
         let result = pseudoY(f)(...params)
