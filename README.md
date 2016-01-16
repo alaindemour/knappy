@@ -1,6 +1,6 @@
 # knappy
 Musings on knapsack problems.
-That's various implementations of the recursive and memoized version of the 0 1 problem, which has better time and space complexity than the bottom up dynamic programming approach that is in all textbooks
+That's various implementations of the recursive and memoized version of the 0 1 problem, which has better time and space complexity than the bottom up dynamic programming approach that is commly found in textbooks
 
 ## Performance
 This is one of the few problems I found where one can use a version of the Y combinator for something semi-practical:
