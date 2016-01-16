@@ -68,7 +68,7 @@ console.log(`Y combinator memoized recursive took ${after - before}  msec`)
 //console.log(`Y combinator recursive took ${after - before}  msec`)
 
 
-//before = Date.now()
-//let dynaHandMemo = smallerKnapsack.zeroOneKnapsackRecursiveGenericMemo(sextet)
-//after = Date.now()
-//console.log(`dynamic hand memo took ${after - before}  msec`)
+before = Date.now()
+let dynaHandMemo = smallerKnapsack.zeroOneKnapsackRecursiveGenericMemo(sextet)
+after = Date.now()
+console.log(`dynamic hand memo took ${after - before}  msec`)
