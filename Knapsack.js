@@ -10,6 +10,9 @@ const Ycombinator = require('./Ycombinator')
 
 const pseudoY = Ycombinator.pseudoY
 const memoY = Ycombinator.memoY
+const TrieCache = require('./TrieCache')
+
+
 
 
 class Knapsack {
@@ -17,7 +20,7 @@ class Knapsack {
         this.capacity = params.capacity
     }
 
-    zeroOneKnapsackRecursiveMemo(listOfItems) {
+    zeroOneKnapsackRecursiveFixedSizeMemo(listOfItems) {
 
         let capacity = this.capacity
         let numberOfPicks = listOfItems.length
@@ -170,6 +173,54 @@ class Knapsack {
     }
 
 
+    zeroOneKnapsackRecursiveGenericMemo(listOfItems) {
+
+        let capacity = this.capacity
+        let numberOfPicks = listOfItems.length
+        // position zero unused in this memo table, just to keep the mapping clear and obivious
+        let memo = new TrieCache()
+        let memoHits = 0
+
+        function bestMax(capacity, numberOfPicks) {
+
+            let hit = memo.get(capacity,numberOfPicks)
+            if (hit) {
+                memoHits++
+                return hit
+            }
+
+            // Base case stops the recursion
+            if (numberOfPicks === 0 || capacity === 0) {
+                let result = [{cumul: 0, item: null}]
+                memo.set(result,numberOfPicks,capacity)
+                return result
+            }
+
+            // General recursive case
+            let currentItem = listOfItems[numberOfPicks - 1]
+
+            if (currentItem.cost > capacity) {
+                return bestMax(capacity, numberOfPicks - 1)
+            }
+            let A = bestMax(capacity - currentItem.cost, numberOfPicks - 1)
+            let B = bestMax(capacity, numberOfPicks - 1)
+            let pathAbenefit = A[0].cumul + currentItem.benefit
+            let pathBbenefit = B[0].cumul
+
+            let result
+            if (pathBbenefit > pathAbenefit) {
+                result = B
+            }
+            else {
+                result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
+                memo.set(result,numberOfPicks,capacity)
+            }
+            return result
+        }
+
+        let finalSolution = bestMax(capacity, numberOfPicks)
+        return finalSolution
+    }
 
 
     // brute for is simple if  very inefficient, to be used to unit testing the faster but more bug-prone versions

@@ -306,7 +306,7 @@ describe('knapsack', () => {
 
     describe('When computing knapsack recursive with the singleton item1', () => {
         it('the benefit shoudl be 60 and the list contains onl item1', () => {
-            let result = target.zeroOneKnapsackRecursiveMemo(singleton)
+            let result = target.zeroOneKnapsackRecursiveFixedSizeMemo(singleton)
             assert.equal(60, result[0].cumul)
         })
     })
@@ -315,7 +315,7 @@ describe('knapsack', () => {
 
     describe('When computing knapsack recursive with the pair [item1,item2]', () => {
         it('the benefit shoudl be 160 and the list contains onl item1 item2', () => {
-            let result = target.zeroOneKnapsackRecursiveMemo(pair)
+            let result = target.zeroOneKnapsackRecursiveFixedSizeMemo(pair)
             assert.equal(160, result[0].cumul)
         })
     })
@@ -325,7 +325,7 @@ describe('knapsack', () => {
 
     describe('When computing knapsack recursive with the truplet [item1,item2,item3]', () => {
         it('the benefit shoudl be 220 and the list contains onl item1 item3', () => {
-            let result = target.zeroOneKnapsackRecursiveMemo(triplet)
+            let result = target.zeroOneKnapsackRecursiveFixedSizeMemo(triplet)
             assert.equal(220, result[0].cumul)
         })
     })
@@ -338,7 +338,7 @@ describe('knapsack', () => {
 
             let smallerKnapsack = new Knapsack({capacity: 30})
 
-            let recResult = smallerKnapsack.zeroOneKnapsackRecursiveMemo(sextet)
+            let recResult = smallerKnapsack.zeroOneKnapsackRecursiveFixedSizeMemo(sextet)
             let bruteForceResult = smallerKnapsack.bruteForce(sextet)
             assert.equal(260, recResult[0].cumul)
             assert.equal(260, bruteForceResult.benefit)
@@ -349,7 +349,7 @@ describe('knapsack', () => {
         it('the benefit shoudl be 260 and should be identical whether computed using recursive and recursive memo', () => {
             let smallerKnapsack = new Knapsack({capacity: 30})
 
-            let recMemoResult = smallerKnapsack.zeroOneKnapsackRecursiveMemo(sextet)
+            let recMemoResult = smallerKnapsack.zeroOneKnapsackRecursiveFixedSizeMemo(sextet)
             let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
             assert.equal(260, recResult[0].cumul)
             assert.equal(260, recMemoResult[0].cumul)
@@ -374,6 +374,17 @@ describe('knapsack', () => {
 
             let YrecResult = smallerKnapsack.zeroOneKnapsackRecursiveMemoY(sextet)
             let recResult = smallerKnapsack.zeroOneKnapsackRecursive(sextet)
+            assert.equal(260, recResult[0].cumul)
+            assert.equal(260, YrecResult[0].cumul)
+        })
+    })
+
+    describe('When computing knapsack recursive with the sextet [item1,item2,item3,item4,item5,item6]', () => {
+        it('the benefit shoudl be 260 and should be identical whether computed using  memoY combinator and Recursive GenericMemo', () => {
+            let smallerKnapsack = new Knapsack({capacity: 30})
+
+            let YrecResult = smallerKnapsack.zeroOneKnapsackRecursiveMemoY(sextet)
+            let recResult = smallerKnapsack.zeroOneKnapsackRecursiveGenericMemo(sextet)
             assert.equal(260, recResult[0].cumul)
             assert.equal(260, YrecResult[0].cumul)
         })
