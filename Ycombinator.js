@@ -15,10 +15,9 @@ function pseudoY(f) {
 }
 
 // Memoizing Y combinator
-function  memoY(f,dimensions) {
+function  memoY(f) {
 
     let memo = new TrieCache()
-    console.log(` Trie cache dimension ${f.length}`)
 
     function cachingY(f) {
         return f((...params) => {

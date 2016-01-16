@@ -179,20 +179,18 @@ class Knapsack {
         let numberOfPicks = listOfItems.length
         // position zero unused in this memo table, just to keep the mapping clear and obivious
         let memo = new TrieCache()
-        let memoHits = 0
 
         function bestMax(capacity, numberOfPicks) {
 
             let hit = memo.get(capacity,numberOfPicks)
             if (hit) {
-                memoHits++
                 return hit
             }
 
             // Base case stops the recursion
             if (numberOfPicks === 0 || capacity === 0) {
                 let result = [{cumul: 0, item: null}]
-                memo.set(result,numberOfPicks,capacity)
+                memo.set(result,capacity,numberOfPicks)
                 return result
             }
 
@@ -213,7 +211,7 @@ class Knapsack {
             }
             else {
                 result = [{cumul: pathAbenefit, item: currentItem}].concat(A)
-                memo.set(result,numberOfPicks,capacity)
+                memo.set(result,capacity,numberOfPicks)
             }
             return result
         }
