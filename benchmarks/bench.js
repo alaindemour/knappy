@@ -16,11 +16,11 @@ const pseudoY = require('../Ycombinator').pseudoY
 const memoY = require('../Ycombinator').memoY
 
 
-let smallerKnapsack = new Knapsack({capacity: 2000})
+let smallerKnapsack = new Knapsack({capacity: 100000})
 
 let sextet = []
 
-for (let i = 0; i < 20; i++){
+for (let i = 0; i < 1000; i++){
     let b = Math.floor(Math.random * 100)
     let c = Math.floor(Math.random * 100)
     sextet.push(new Item({benefit: b, cost: c, name : `${i}`}))
@@ -40,6 +40,11 @@ let before = 0
 let after = 0
 
 before = Date.now()
+let handMemoizedRecursiveResult = smallerKnapsack.zeroOneKnapsackRecursiveFixedSizeMemo(sextet)
+after = Date.now()
+console.log(`Hand Memoized Recursive took ${after - before}  msec`)
+
+before = Date.now()
 let YMemoizedRecursiveResult = smallerKnapsack.zeroOneKnapsackRecursiveMemoY(sextet)
 after = Date.now()
 console.log(`Y combinator memoized recursive took ${after - before}  msec`)
@@ -55,10 +60,7 @@ console.log(`Y combinator memoized recursive took ${after - before}  msec`)
 //after = Date.now()
 //console.log(`Naive Recursive took ${after - before}  msec`)
 
-//before = Date.now()
-//let handMemoizedRecursiveResult = smallerKnapsack.zeroOneKnapsackRecursiveFixedSizeMemo(sextet)
-//after = Date.now()
-//console.log(`Hand Memoized Recursive took ${after - before}  msec`)
+
 
 //before = Date.now()
 //let YRecursiveResult = smallerKnapsack.zeroOneKnapsackRecursiveY(sextet)
