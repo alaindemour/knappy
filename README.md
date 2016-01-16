@@ -8,7 +8,7 @@ In this case it is to memoize the highly recursive knapsack solution, but doing 
 The Y combinator does not add much performance overhead.
 
 The performance profile is actually mostly affected by how efficient the multi-dimenstional lookup table used for the cache is.
-Something not triggering too much array re-allcation by V8 and optimized one can have a 10x performance difference. Interestingly enough
+Something not triggering too many array re-allcations by V8 and optimized can deliver a 10x performance difference. Interestingly enough
 one lazily allocated but with the right size here has better performance than one pre-initialized with empty arrays.
 
 ## node version
